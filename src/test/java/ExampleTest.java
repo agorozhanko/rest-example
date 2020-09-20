@@ -48,4 +48,16 @@ public class ExampleTest {
                 .extract().response().prettyPrint();
     }
 
+    @Test
+    public void equalsPetNameTest() {
+        RestAssured.given()
+                .baseUri("http://petstore.swagger.io")
+                .basePath("/v2/pet/1")
+                .contentType(ContentType.JSON)
+                .header("api_key", "agorozhanko")
+                .when().get()
+                .then()
+                .body("name", equalTo("Lucky"));
+    }
+
 }
