@@ -2,6 +2,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.Matchers.equalTo;
+
 public class ExampleTest {
 
     @Test
@@ -32,6 +34,18 @@ public class ExampleTest {
                 .when().post()
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    public void printResponseTest() {
+        RestAssured.given()
+                .baseUri("http://petstore.swagger.io")
+                .basePath("/v2/pet/1")
+                .contentType(ContentType.JSON)
+                .header("api_key", "agorozhanko")
+                .when().get()
+                .then()
+                .extract().response().prettyPrint();
     }
 
 }
